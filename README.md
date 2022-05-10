@@ -15,6 +15,7 @@ CHANGELOG:
   - 10th may 2022:
      - added support for roblox gift codes
      - added support for steam wallet gift codes
+     - added support for fornite (vbucks) gift codes
      - changed the menu, you now have to use arrow keys to navigate
      - fixed console title bug
      - make a little change to the nitro generator and checker for optimisation
