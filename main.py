@@ -5,6 +5,7 @@ import time
 import requests
 from time import sleep
 from os import system
+from pick import pick
 from rich import print as printf
 def clear():
     if os.name == 'nt':
@@ -15,13 +16,35 @@ try:
     os.mkdir('output')
 except FileExistsError:
     pass
-banner = """
-[red]╔═╗╦╔═╗╔╦╗  ╔═╗╔═╗╔╦╗╔═╗  ╔═╗╔═╗╔╗╔╔═╗╦═╗╔═╗╔╦╗╔═╗╦═╗[/red]
-[red]║ ╦║╠╣  ║   ║  ║ ║ ║║║╣   ║ ╦║╣ ║║║║╣ ╠╦╝╠═╣ ║ ║ ║╠╦╝   [/red]
-[red]╚═╝╩╚   ╩   ╚═╝╚═╝═╩╝╚═╝  ╚═╝╚═╝╝╚╝╚═╝╩╚═╩ ╩ ╩ ╚═╝╩╚═ [/red]
-"""
+
+def roblox():
+    system('title code gen - roblox')
+    printf("""
+[grey]╦═╗╔═╗╔╗ ╦  ╔═╗═╗ ╦
+╠╦╝║ ║╠╩╗║  ║ ║╔╩╦╝
+╩╚═╚═╝╚═╝╩═╝╚═╝╩ ╚═[/grey]
+""")
+    try:
+        amount = int(input("How many roblox gift codes to generate: "))
+        f = open('./output/robloxcodes.txt', 'a+')
+        for i in range(amount):
+            first = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
+            second = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
+            third = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
+            fourth = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
+            code = f'RI-{first}-{second}-{third}-{fourth}'
+            printf(f"[green]new code: [grey]{code}[/grey]")
+            f.write(code)
+        input("Press enter to go back to the main menu")
+        clear()
+        main()
+    except ValueError:
+        printf("[bold red]ERROR: please enter a valid number next time")
+        sleep(3)
+        clear()
+        roblox()
 def psn():
-    system('title menu code gen - psn')
+    system('title code gen - psn')
     printf("""
 [cyan]╔═╗╔═╗╔╗╔  ╔═╗╔═╗╔╦╗╔═╗  ╔═╗╔═╗╔╗╔╔═╗╦═╗╔═╗╔╦╗╔═╗╦═╗                       
 ╠═╝╚═╗║║║  ║  ║ ║ ║║║╣   ║ ╦║╣ ║║║║╣ ╠╦╝╠═╣ ║ ║ ║╠╦╝                       
@@ -39,15 +62,14 @@ def psn():
         print("press enter to go back to the menu")
         input()
         clear()
-    except KeyboardInterrupt:
-        clear()
+        main()
     except ValueError:
         printf("[bold red]ERROR: please enter a valid number next time")
         sleep(3)
         clear()
         psn()
 def xbox():
-    system('title menu code gen - xbox')
+    system('title code gen - xbox')
     printf("""
 [green]═╗ ╦╔╗ ╔═╗═╗ ╦  ╔═╗╔═╗╔╦╗╔═╗  ╔═╗╔═╗╔╗╔╔═╗╦═╗╔═╗╔╦╗╔═╗╦═╗                  
 ╔╩╦╝╠╩╗║ ║╔╩╦╝  ║  ║ ║ ║║║╣   ║ ╦║╣ ║║║║╣ ╠╦╝╠═╣ ║ ║ ║╠╦╝                  
@@ -67,14 +89,14 @@ def xbox():
         print("press enter to back to the main menu")
         input()
         clear()
-    except KeyboardInterrupt:
-        clear()
+        main()
     except ValueError:
         printf("[bold red]ERROR: please enter a valid number next time")
         sleep(3)
         clear()
         xbox()
-def quickChecker(nitro:str):
+def quickChecker():
+    nitro = ("".join(random.choices(string.ascii_uppercase + string.digits + string.ascii_lowercase, k = 16)))
     b = open('./output/nitrocodes.txt', 'a+')
     url = f"https://discordapp.com/api/v9/entitlements/gift-codes/{nitro}?with_application=false&with_subscription_plan=true"
     response = requests.get(url)
@@ -86,7 +108,7 @@ def quickChecker(nitro:str):
         printf(f"[red]Invalid[/red] | https://discord.gift/{nitro}")
 
 def nitro():
-    system('title menu code gen - nitro')
+    system('title code gen - nitro')
     printf("""[#5865F2]
 ╔╗╔╦╔╦╗╦═╗╔═╗  ╔═╗╔═╗╔╦╗╔═╗  ╔═╗╔═╗╔╗╔╔═╗╦═╗╔═╗╔╦╗╔═╗╦═╗
 ║║║║ ║ ╠╦╝║ ║  ║  ║ ║ ║║║╣   ║ ╦║╣ ║║║║╣ ╠╦╝╠═╣ ║ ║ ║╠╦╝
@@ -95,20 +117,18 @@ def nitro():
     try:
         amount = int(input("How many nitro codes to generate: "))
         for i in range(amount):
-            code = ("".join(random.choices(string.ascii_uppercase + string.digits + string.ascii_lowercase, k = 16)))
-            quickChecker(code)
+            quickChecker()
         print("Press enter to go back to the menu")
         input()
         clear()
-    except KeyboardInterrupt:
-        clear()
+        main()
     except ValueError:
         printf("[bold red]ERROR: please enter a valid amount next time")
         sleep(3)
         clear()
         nitro()
 def google():
-    system('title menu code gen - google play')
+    system('title code gen - google play')
     printf("""[yellow]
 ╔═╗╔═╗╔═╗╔═╗╦  ╔═╗  ╔═╗╦  ╔═╗╦ ╦  ╔═╗╔═╗╔╦╗╔═╗  ╔═╗╔═╗╔╗╔╔═╗╦═╗╔═╗╔╦╗╔═╗╦═╗
 ║ ╦║ ║║ ║║ ╦║  ║╣   ╠═╝║  ╠═╣╚╦╝  ║  ║ ║ ║║║╣   ║ ╦║╣ ║║║║╣ ╠╦╝╠═╣ ║ ║ ║╠╦╝
@@ -129,42 +149,37 @@ def google():
         print("press enter to back to the main menu")
         input()
         clear()
-    except KeyboardInterrupt:
-        clear()
-def main():
-    try:
-        system('title menu code gen - menu')
-        printf(banner)
-        printf("""
-1. xbox gift code generator
-2. psn gift code generator
-3. nitro gift code generator
-4. google play gift code generator
-        """)
-        choice = int(input("> "))
+        main()
     except ValueError:
-        printf("[bold red]ERROR: please enter a valid option next time")
+        printf("[bold red]ERROR: please enter a valid number next time")
         sleep(3)
         clear()
-        main()
-    except KeyboardInterrupt:
-        clear()
-        main()
-    if choice == 1:
+        google()
+
+def main():
+    system('title code gen - menu')
+    title = 'Please choose a gift code type to generate: '
+    options = ['xbox', 'psn', 'nitro', 'google play', 'roblox', 'exit']
+    option, index = pick(options, title, indicator='>>')
+    if option == 'xbox':
         clear()
         xbox()
-        main()
-    elif choice == 2:
+    elif option == 'psn':
         clear()
         psn()
-        main()
-    elif choice == 3:
+    elif option == 'nitro':
         clear()
         nitro()
-        main()
-    elif choice == 4:
+    elif option == 'google play':
         clear()
         google()
-        main()
+    elif option == 'roblox':
+        clear()
+        roblox()
+    elif option == 'exit':
+        clear()
+        os._exit(1)
+
+
         
 main()
