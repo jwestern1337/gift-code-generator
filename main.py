@@ -16,13 +16,37 @@ try:
     os.mkdir('output')
 except FileExistsError:
     pass
-
+def steam():
+    system('title code gen - steam')
+    printf("""
+╔═╗╔╦╗╔═╗╔═╗╔╦╗
+╚═╗ ║ ║╣ ╠═╣║║║
+╚═╝ ╩ ╚═╝╩ ╩╩ ╩
+""")
+    try:
+        amount = int(input("How many steam gift codes to generate: "))
+        f = open('./output/steamcodes.txt', 'a+')
+        for i in range(amount):
+            first = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 5)))
+            second = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 5)))
+            third = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 5)))
+            code = f'{first}-{second}-{third}'
+            printf(f"[green]new code: {code}")
+            f.write(f'{code}\n')
+        input("Press enter to go back to the main menu")
+        clear()
+        main()
+    except ValueError:
+        printf("[bold red]ERROR: please enter a valid number next time")
+        sleep(3)
+        clear()
+        roblox()
 def roblox():
     system('title code gen - roblox')
     printf("""
-[grey]╦═╗╔═╗╔╗ ╦  ╔═╗═╗ ╦
+[gray]╦═╗╔═╗╔╗ ╦  ╔═╗═╗ ╦
 ╠╦╝║ ║╠╩╗║  ║ ║╔╩╦╝
-╩╚═╚═╝╚═╝╩═╝╚═╝╩ ╚═[/grey]
+╩╚═╚═╝╚═╝╩═╝╚═╝╩ ╚═[/gray]
 """)
     try:
         amount = int(input("How many roblox gift codes to generate: "))
@@ -33,8 +57,8 @@ def roblox():
             third = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
             fourth = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
             code = f'RI-{first}-{second}-{third}-{fourth}'
-            printf(f"[green]new code: [grey]{code}[/grey]")
-            f.write(code)
+            printf(f"[green]new code: [gray]{code}[/gray]")
+            f.write(f'{code}\n')
         input("Press enter to go back to the main menu")
         clear()
         main()
@@ -159,7 +183,7 @@ def google():
 def main():
     system('title code gen - menu')
     title = 'Please choose a gift code type to generate: '
-    options = ['xbox', 'psn', 'nitro', 'google play', 'roblox', 'exit']
+    options = ['xbox', 'psn', 'nitro', 'google play', 'roblox', 'steam' ,'exit']
     option, index = pick(options, title, indicator='>>')
     if option == 'xbox':
         clear()
@@ -176,6 +200,9 @@ def main():
     elif option == 'roblox':
         clear()
         roblox()
+    elif option == 'steam':
+        clear()
+        steam()
     elif option == 'exit':
         clear()
         os._exit(1)
