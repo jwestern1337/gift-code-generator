@@ -16,7 +16,32 @@ try:
     os.mkdir('output')
 except FileExistsError:
     pass
-def fortnite():
+def amazon():
+    system('title code gen - amazon')
+    printf("""
+╔═╗╔╦╗╔═╗╔═╗╔═╗╔╗╔
+╠═╣║║║╠═╣╔═╝║ ║║║║
+╩ ╩╩ ╩╩ ╩╚═╝╚═╝╝╚╝
+""")
+    try:
+        amount = int(input("How many amazon gift codes to generate: "))
+        f = open('./output/amazoncodes.txt', 'a+')
+        for i in range(amount):
+            first = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
+            second = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 5)))
+            third = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 5)))
+            code = f'{first}-{second}-{third}'
+            printf(f"[green]new code: {code}")
+            f.write(f'{code}\n')
+        input("Press enter to go back to the main menu")
+        clear()
+        main()
+    except ValueError:
+        printf("[bold red]ERROR: please enter a valid number next time")
+        sleep(3)
+        clear()
+        fortnite()
+def fortnite(): 
     system('title code gen - fortnite')
     printf("""
 ╔═╗╔═╗╦═╗╔╦╗╔╗╔╦╔╦╗╔═╗
@@ -24,7 +49,7 @@ def fortnite():
 ╚  ╚═╝╩╚═ ╩ ╝╚╝╩ ╩ ╚═╝
 """)
     try:
-        amount = int(input("How many steam gift codes to generate: "))
+        amount = int(input("How many fortnite gift codes to generate: "))
         f = open('./output/fortnitecodes.txt', 'a+')
         for i in range(amount):
             first = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 16)))
@@ -206,7 +231,7 @@ def google():
 def main():
     system('title code gen - menu')
     title = 'Please choose a gift code type to generate: '
-    options = ['xbox', 'psn', 'nitro', 'google play', 'roblox', 'steam', 'fortnite', 'exit']
+    options = ['xbox', 'psn', 'nitro', 'google play', 'roblox', 'steam', 'fortnite', 'amazon', 'exit']
     option, index = pick(options, title, indicator='>>')
     if option == 'xbox':
         clear()
@@ -229,6 +254,9 @@ def main():
     elif option == 'fortnite':
         clear()
         fortnite()
+    elif option == 'amazon':
+        clear()
+        amazon()
     elif option == 'exit':
         clear()
         os._exit(1)
