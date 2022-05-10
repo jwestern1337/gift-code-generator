@@ -16,6 +16,29 @@ try:
     os.mkdir('output')
 except FileExistsError:
     pass
+def fortnite():
+    system('title code gen - fortnite')
+    printf("""
+╔═╗╔═╗╦═╗╔╦╗╔╗╔╦╔╦╗╔═╗
+╠╣ ║ ║╠╦╝ ║ ║║║║ ║ ║╣ 
+╚  ╚═╝╩╚═ ╩ ╝╚╝╩ ╩ ╚═╝
+""")
+    try:
+        amount = int(input("How many steam gift codes to generate: "))
+        f = open('./output/fortnitecodes.txt', 'a+')
+        for i in range(amount):
+            first = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 16)))
+            code = f'{first}'
+            printf(f"[green]new code: {code}")
+            f.write(f'{code}\n')
+        input("Press enter to go back to the main menu")
+        clear()
+        main()
+    except ValueError:
+        printf("[bold red]ERROR: please enter a valid number next time")
+        sleep(3)
+        clear()
+        fortnite()
 def steam():
     system('title code gen - steam')
     printf("""
@@ -40,7 +63,7 @@ def steam():
         printf("[bold red]ERROR: please enter a valid number next time")
         sleep(3)
         clear()
-        roblox()
+        steam()
 def roblox():
     system('title code gen - roblox')
     printf("""
@@ -183,7 +206,7 @@ def google():
 def main():
     system('title code gen - menu')
     title = 'Please choose a gift code type to generate: '
-    options = ['xbox', 'psn', 'nitro', 'google play', 'roblox', 'steam' ,'exit']
+    options = ['xbox', 'psn', 'nitro', 'google play', 'roblox', 'steam', 'fortnite', 'exit']
     option, index = pick(options, title, indicator='>>')
     if option == 'xbox':
         clear()
@@ -203,6 +226,9 @@ def main():
     elif option == 'steam':
         clear()
         steam()
+    elif option == 'fortnite':
+        clear()
+        fortnite()
     elif option == 'exit':
         clear()
         os._exit(1)
@@ -210,3 +236,4 @@ def main():
 
         
 main()
+
