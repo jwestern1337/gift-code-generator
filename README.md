@@ -10,7 +10,7 @@ DISCLAIMER:
 I don't take responsibility for any outcomes of your use of this.
 I created this as a proof of concept.
 I will not and do not take responsibility for your actions.
-The odds of these codes working are actually very slim, however if one does work and you get into legal trouble, i do not take responsibility.
+
 
 CHANGELOG:
   - 10th may 2022:
