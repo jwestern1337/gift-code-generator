@@ -21,3 +21,5 @@ CHANGELOG:
      - changed the menu, you now have to use arrow keys to navigate
      - fixed console title bug
      - make a little change to the nitro generator and checker for optimisation
+  - 11th may 2022:
+     - added a title to keep count of how many codes have been generated out of how many are to be generated (using threading library)
