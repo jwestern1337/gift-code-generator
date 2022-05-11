@@ -3,6 +3,8 @@ import string
 import os
 import time
 import requests
+import threading
+import ctypes
 from time import sleep
 from os import system
 from pick import pick
@@ -16,8 +18,22 @@ try:
     os.mkdir('output')
 except FileExistsError:
     pass
+class title:
+    gen = 0
+    to_gen = 0
+    thing='menu'
+    def set():
+        if title.to_gen == title.gen:
+            title.reset()
+        while True:
+            ctypes.windll.kernel32.SetConsoleTitleW(f"code gen - {title.thing} {f'- made {title.gen}/{title.to_gen}' if title.thing != 'menu' else ''}")
+    def reset():
+        title.gen = 0
+        title.to_gen = 0
+        title.thing = 'menu'
 def amazon():
-    system('title code gen - amazon')
+    
+    title.thing = ('amazon')
     printf("""
 ╔═╗╔╦╗╔═╗╔═╗╔═╗╔╗╔
 ╠═╣║║║╠═╣╔═╝║ ║║║║
@@ -25,8 +41,10 @@ def amazon():
 """)
     try:
         amount = int(input("How many amazon gift codes to generate: "))
+        title.to_gen += amount
         f = open('./output/amazoncodes.txt', 'a+')
         for i in range(amount):
+            title.gen += 1
             first = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
             second = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 5)))
             third = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 5)))
@@ -42,7 +60,7 @@ def amazon():
         clear()
         fortnite()
 def fortnite(): 
-    system('title code gen - fortnite')
+    title.thing = ('fortnite')
     printf("""
 ╔═╗╔═╗╦═╗╔╦╗╔╗╔╦╔╦╗╔═╗
 ╠╣ ║ ║╠╦╝ ║ ║║║║ ║ ║╣ 
@@ -50,8 +68,10 @@ def fortnite():
 """)
     try:
         amount = int(input("How many fortnite gift codes to generate: "))
+        title.to_gen += amount
         f = open('./output/fortnitecodes.txt', 'a+')
         for i in range(amount):
+            title.gen += 1
             first = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 16)))
             code = f'{first}'
             printf(f"[green]new code: {code}")
@@ -65,7 +85,8 @@ def fortnite():
         clear()
         fortnite()
 def steam():
-    system('title code gen - steam')
+    
+    title.thing = ('steam')
     printf("""
 ╔═╗╔╦╗╔═╗╔═╗╔╦╗
 ╚═╗ ║ ║╣ ╠═╣║║║
@@ -73,8 +94,10 @@ def steam():
 """)
     try:
         amount = int(input("How many steam gift codes to generate: "))
+        title.to_gen += 1
         f = open('./output/steamcodes.txt', 'a+')
         for i in range(amount):
+            title.gen += 1
             first = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 5)))
             second = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 5)))
             third = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 5)))
@@ -90,16 +113,19 @@ def steam():
         clear()
         steam()
 def roblox():
-    system('title code gen - roblox')
+    
+    title.thing = ('roblox')
     printf("""
-[gray]╦═╗╔═╗╔╗ ╦  ╔═╗═╗ ╦
+[#808080]╦═╗╔═╗╔╗ ╦  ╔═╗═╗ ╦
 ╠╦╝║ ║╠╩╗║  ║ ║╔╩╦╝
-╩╚═╚═╝╚═╝╩═╝╚═╝╩ ╚═[/gray]
+╩╚═╚═╝╚═╝╩═╝╚═╝╩ ╚═[/#808080]
 """)
     try:
         amount = int(input("How many roblox gift codes to generate: "))
+        title.to_gen += amount
         f = open('./output/robloxcodes.txt', 'a+')
         for i in range(amount):
+            title.gen += 1
             first = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
             second = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
             third = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
@@ -116,7 +142,8 @@ def roblox():
         clear()
         roblox()
 def psn():
-    system('title code gen - psn')
+    
+    title.thing = ('psn')
     printf("""
 [cyan]╔═╗╔═╗╔╗╔  ╔═╗╔═╗╔╦╗╔═╗  ╔═╗╔═╗╔╗╔╔═╗╦═╗╔═╗╔╦╗╔═╗╦═╗                       
 ╠═╝╚═╗║║║  ║  ║ ║ ║║║╣   ║ ╦║╣ ║║║║╣ ╠╦╝╠═╣ ║ ║ ║╠╦╝                       
@@ -124,8 +151,10 @@ def psn():
 """)
     try:
         amount = int(input("How many psn gift codes to generate: "))
+        title.to_gen += amount
         f = open('./output/psncodes.txt', 'a+')
         for i in range(amount):
+            title.gen += 1
             first = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
             second = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
             third = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
@@ -141,7 +170,8 @@ def psn():
         clear()
         psn()
 def xbox():
-    system('title code gen - xbox')
+    
+    title.thing = ('xbox')
     printf("""
 [green]═╗ ╦╔╗ ╔═╗═╗ ╦  ╔═╗╔═╗╔╦╗╔═╗  ╔═╗╔═╗╔╗╔╔═╗╦═╗╔═╗╔╦╗╔═╗╦═╗                  
 ╔╩╦╝╠╩╗║ ║╔╩╦╝  ║  ║ ║ ║║║╣   ║ ╦║╣ ║║║║╣ ╠╦╝╠═╣ ║ ║ ║╠╦╝                  
@@ -149,8 +179,10 @@ def xbox():
 """)
     try:
         amount = int(input("How many xbox gift codes to generate: "))
+        title.to_gen += amount
         a = open('./output/xboxcodes.txt', 'a+')
         for i in range(amount):
+            title.gen += 1
             first = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 5)))
             second = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 5)))
             third = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 5)))
@@ -180,7 +212,8 @@ def quickChecker():
         printf(f"[red]Invalid[/red] | https://discord.gift/{nitro}")
 
 def nitro():
-    system('title code gen - nitro')
+    
+    title.thing = ('nitro')
     printf("""[#5865F2]
 ╔╗╔╦╔╦╗╦═╗╔═╗  ╔═╗╔═╗╔╦╗╔═╗  ╔═╗╔═╗╔╗╔╔═╗╦═╗╔═╗╔╦╗╔═╗╦═╗
 ║║║║ ║ ╠╦╝║ ║  ║  ║ ║ ║║║╣   ║ ╦║╣ ║║║║╣ ╠╦╝╠═╣ ║ ║ ║╠╦╝
@@ -188,7 +221,9 @@ def nitro():
 """)
     try:
         amount = int(input("How many nitro codes to generate: "))
+        title.to_gen += amount
         for i in range(amount):
+            title.gen += 1
             quickChecker()
         print("Press enter to go back to the menu")
         input()
@@ -200,7 +235,8 @@ def nitro():
         clear()
         nitro()
 def google():
-    system('title code gen - google play')
+    
+    title.thing = ('roblox')
     printf("""[yellow]
 ╔═╗╔═╗╔═╗╔═╗╦  ╔═╗  ╔═╗╦  ╔═╗╦ ╦  ╔═╗╔═╗╔╦╗╔═╗  ╔═╗╔═╗╔╗╔╔═╗╦═╗╔═╗╔╦╗╔═╗╦═╗
 ║ ╦║ ║║ ║║ ╦║  ║╣   ╠═╝║  ╠═╣╚╦╝  ║  ║ ║ ║║║╣   ║ ╦║╣ ║║║║╣ ╠╦╝╠═╣ ║ ║ ║╠╦╝
@@ -208,8 +244,10 @@ def google():
 """)
     try:
         amount = int(input("How many google play gift codes to generate: "))
+        title.to_gen += amount
         c = open('./output/googlecodes.txt', 'a+')
         for i in range(amount):
+            title.gen += 1
             first = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
             second = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
             third = ("".join(random.choices(string.ascii_uppercase + string.digits, k = 4)))
@@ -229,10 +267,10 @@ def google():
         google()
 
 def main():
-    system('title code gen - menu')
-    title = 'Please choose a gift code type to generate: '
+    threading.Thread(target=title.set).start()
+    title2 = 'Please choose a gift code type to generate: '
     options = ['xbox', 'psn', 'nitro', 'google play', 'roblox', 'steam', 'fortnite', 'amazon', 'exit']
-    option, index = pick(options, title, indicator='>>')
+    option, index = pick(options, title2, indicator='>>')
     if option == 'xbox':
         clear()
         xbox()
@@ -261,7 +299,5 @@ def main():
         clear()
         os._exit(1)
 
-
-        
 main()
 
